@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  go-app:
+      build: ./go-app
+      image: go_app
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+      networks:
+       - trivago
+
+  java-app:
+      build: ./java-app
+      image: java_app
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+      networks:
+       - trivago
+
+  loadbalancer:
+      build: ./lb
+      image: nginx_lb
+      depends_on:
+        - go-app
+        - java-app
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+      ports:
+       - '80:80'
+      networks:
+       - trivago
+
+networks:
+  trivago:
