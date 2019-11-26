@@ -17,7 +17,7 @@ services:
   wordpress:
     image: wordpress
     links:
-      - wordpress_db:mysql
+      - db:mysql
     ports:
       - 80:80
     volumes:
