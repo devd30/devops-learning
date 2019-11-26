@@ -21,7 +21,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./wp-config.php:/var/www/html/
+      - ${PWD}/config/:/var/www/html/
     deploy:
       restart_policy:
         condition: on-failure
