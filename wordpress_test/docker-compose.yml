@@ -20,8 +20,12 @@ services:
       - db:mysql
     ports:
       - 80:80
-    volumes:
-      - ${PWD}/config/*:/var/www/html/
+    configs:
+      - source: wp-config.php
+        target: /var/www/html
+        uid: '33'
+        gid: '33'
+        mode: 0644
     deploy:
       restart_policy:
         condition: on-failure
@@ -33,6 +37,10 @@ services:
       DB_USER: root
       DB_PASSWORD: cGFzc3dvcmQK
       DB_HOST: db
+      
+  configs:
+    my_config:
+      file: ${PWD}/config/wp-config.php
 
   
  
