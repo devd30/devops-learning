@@ -5,7 +5,7 @@ services:
       links:
         - wordpress_db:mysql
       ports:
-        - 8080:80
+        - 80:80
       deploy:
         restart_policy:
           condition: on-failure
