@@ -1,5 +1,19 @@
 version: '3.7'
 services:
+  db:
+    image: mysql
+    ports:
+        - 3306:3306
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment: 
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: cGFzc3dvcmQK
+
   wordpress:
       image: wordpress
       links:
@@ -12,21 +26,14 @@ services:
           delay: 5s
           max_attempts: 3
           window: 120s
+    environment:
+      DB_NAME: wordpress
+      DB_USER: root
+      DB_PASSWORD: cGFzc3dvcmQK
+      DB_HOST: db
 
   
-  wordpress_db:
-    image: mysql
-    ports:
-        - 3306:3306
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-    environment: 
-      MYSQL_ROOT_PASSWORD: cGFzc3dvcmQK
-      MYSQL_DATABASE: wordpress
+ 
       
 
 
