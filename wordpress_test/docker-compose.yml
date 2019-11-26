@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  wordpress:
+      image: wordpress
+      links:
+        - wordpress_db:mysql
+      ports:
+        - 8080:80
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
+
+  
+  wordpress_db:
+    image: mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment: 
+      MYSQL_ROOT_PASSWORD: cGFzc3dvcmQK
+
+
+
+
