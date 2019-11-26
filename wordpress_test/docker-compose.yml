@@ -21,7 +21,7 @@ services:
     ports:
       - 80:80
     configs:
-      - source: wp-config.php
+      - source: my_config
         target: /var/www/html
         uid: '33'
         gid: '33'
