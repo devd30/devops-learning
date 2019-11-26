@@ -15,19 +15,19 @@ services:
       MYSQL_ROOT_PASSWORD: cGFzc3dvcmQK
 
   wordpress:
-      image: wordpress
-      links:
-        - wordpress_db:mysql
-      ports:
-        - 80:80
-      volumes:
-         - ./wp-config.php:/var/www/html
-      deploy:
-        restart_policy:
-          condition: on-failure
-          delay: 5s
-          max_attempts: 3
-          window: 120s
+    image: wordpress
+    links:
+      - wordpress_db:mysql
+    ports:
+      - 80:80
+    volumes:
+      - ./wp-config.php:/var/www/html
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
       DB_NAME: wordpress
       DB_USER: root
