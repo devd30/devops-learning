@@ -1,0 +1,5 @@
+#!/bin/bash
+
+file="./logfile"
+awk '{print $1}' $file | sort | uniq -c | sort -r | head -8 
+
